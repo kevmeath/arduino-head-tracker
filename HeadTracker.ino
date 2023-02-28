@@ -1,14 +1,41 @@
-#include <MadgwickAHRS.h>
 #include <LSM6DS3.h>
+
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <WiFiNINA.h>
+#include <WiFiServer.h>
+#include <WiFiSSLClient.h>
+#include <WiFiStorage.h>
+#include <WiFiUdp.h>
+
+#include <MadgwickAHRS.h>
+
+#include "secrets.h"
 
 #define SAMPLE_RATE 104.0f
 
 Madgwick filter;
 
+char ssid[] = SECRET_SSID;
+char pass[] = SECRET_PASS;
+int wifi_status = WL_IDLE_STATUS;
+
 void setup()
 {
     Serial.begin(9600);
     while (!Serial);
+
+    while (wifi_status != WL_CONNECTED)
+    {
+        Serial.print("Connecting to network: ");
+        Serial.println(ssid);
+        
+        wifi_status = WiFi.begin(ssid, pass);
+
+        delay(10000);
+    }
+
+    Serial.println("Connected to network");
 
     if (!IMU.begin())
     {
