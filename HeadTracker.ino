@@ -1,12 +1,6 @@
 #include <LSM6DS3.h>
 
-#include <WiFi.h>
-#include <WiFiClient.h>
 #include <WiFiNINA.h>
-#include <WiFiServer.h>
-#include <WiFiSSLClient.h>
-#include <WiFiStorage.h>
-#include <WiFiUdp.h>
 
 #include <MadgwickAHRS.h>
 
