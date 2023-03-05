@@ -14,7 +14,7 @@ char ssid[] = SECRET_SSID;
 char pass[] = SECRET_PASS;
 int wifi_status = WL_IDLE_STATUS;
 
-float accelX, accelY, accelZ;
+float accX, accY, accZ;
 float gyroX, gyroY, gyroZ;
 float yaw, pitch, roll;
 
@@ -48,10 +48,10 @@ void loop()
 {   
     if (IMU.accelerationAvailable() && IMU.gyroscopeAvailable())
     {
-        IMU.readAcceleration(accelX, accelY, accelZ);
+        IMU.readAcceleration(accX, accY, accZ);
         IMU.readGyroscope(gyroX, gyroY, gyroZ);
 
-        filter.updateIMU(gyroX, gyroY, gyroZ, accelX, accelY, accelZ);
+        filter.updateIMU(gyroX, gyroY, gyroZ, accX, accY, accZ);
 
         yaw = filter.getYaw();
         pitch = filter.getPitch();
